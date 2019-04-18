@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'maven'
+    id 'idea'
+}
+
+group 'br.com.ebexs.routerfinder'
+version '0.0.1-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+
+
+dependencies {
+    compile group: 'br.com.ebexs.routerfindermodel.model', name: 'routerfinder-model',
+            version: '0.0.1-SNAPSHOT'
+    compile group: 'br.com.ebexs.routerfinderservice', name: 'routerfinder-service', version:'0.0.1-SNAPSHOT'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+jar {
+    manifest {
+        attributes (
+                'Class-Path': configurations.compile.files.collect {"$it.name"}.join(' '),
+                'Main-Class': 'br.com.ebexs.routerfinder.startup.Startup')
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
+}

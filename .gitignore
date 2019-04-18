@@ -1,0 +1,7 @@
+.idea
+java_pid10205*
+routerfinder.ipr 
+routerfinder.iml
+routerfinder.iws
+out/
+.gradle
